@@ -1,16 +1,17 @@
 package pavel.demo.services;
 
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Service;
-
-@Service
-@Primary
-@Profile({"en", "default"})
 public class PrimaryGreetingService implements GreetingService{
+
+	// fields
+	private GreetingRepository greetingRepository;
+
+	// constructors
+	public PrimaryGreetingService(GreetingRepository greetingRepository) {
+		this.greetingRepository = greetingRepository;
+	}
 
 	@Override
 	public String sayGreeting() {
-		return "Hello - Primary Greeting service";
+		return greetingRepository.getEnglishGreeting();
 	}
 }

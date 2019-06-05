@@ -1,16 +1,21 @@
 package pavel.demo.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 
+import pavel.demo.data.DataSource;
 import pavel.demo.services.GreetingRepository;
 import pavel.demo.services.GreetingService;
 import pavel.demo.services.GreetingServiceFactory;
 
 @Configuration
 public class GreetingServiceConfig {
+
+	@Value(("${demo.user}"))
+	private String user;
 
 	@Bean
 	GreetingServiceFactory greetingServiceFactory(GreetingRepository repository){
@@ -39,4 +44,15 @@ public class GreetingServiceConfig {
 	}
 
 
+	@Bean
+	public String user(){
+		return user;
+	}
+
+	@Bean
+	public DataSource dataSource(){
+		DataSource dataSource = new DataSource();
+		dataSource.setUser(user);
+		return dataSource;
+	}
 }

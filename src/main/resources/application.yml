@@ -1,0 +1,8 @@
+demo:
+  user: Alex-yml
+
+---
+spring:
+  profiles: es
+demo:
+  user: Pavel - es
